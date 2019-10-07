@@ -1,0 +1,61 @@
+MAP 
+  NAME		"GENERIC_MAP"
+  # EXTENT EPSG:31467 (strassen)
+  EXTENT -73.981777	45.413206	-73.394009	45.702635
+  UNITS meters
+  Size		800 800
+  SYMBOLSET	"symbols/symbols.txt"
+  IMAGETYPE	PNG	
+  #CONFIG "MS_ERRORFILE" "/tmp/generic_ms_error.txt"
+  STATUS ON
+  DEBUG 5	
+  
+  WEB
+    IMAGEPATH '/tmp/'
+    IMAGEURL '/tmp/'
+
+    METADATA
+      "wfs_title"	"Generic"
+      "wms_title"	"Generic"
+      "wms_onlineresource" "localhost/cgi-bin/mapserv?map=/map/generic.map&"   ##required
+      "wms_srs"       "EPSG:42304 EPSG:3857 EPSG:42101 EPSG:4269 EPSG:4326"  ##recommended
+      "wms_enable_request"	"*"	
+    END
+  END
+
+  CONFIG "PROJ_LIB" "epsg/"
+
+  PROJECTION
+    "init=epsg:4326"
+  END
+
+  LAYER
+    NAME	"quebec"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "host=localhost dbname=postgres user=postgres password=postgres port=5432"
+    DATA "wkb_geometry FROM public.quebec"
+    # EXTENT -73.981777	45.413206	-73.394009	45.702635
+    PROJECTION
+        "init=epsg:4326"
+    END
+    STATUS ON
+    DEBUG 5
+    DUMP TRUE
+    METADATA
+      "wfs_title"	"quebec"
+      "wms_title"	"quebec"
+      "gml_include_items" "all" ## Optional (serves all attributes for layer)
+      "gml_featureid"   "gpShapeID" ## REQUIRED
+    END
+    TYPE	POLYGON
+    CLASS
+        NAME "Buildings"
+        STYLE
+            COLOR 255 235 190
+            OUTLINECOLOR 0 0 0
+            SYMBOL 0
+        END
+    END
+  END #layer
+
+END #map

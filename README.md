@@ -67,6 +67,15 @@ http://localhost:8181/cgi-bin/mapserv?map=/map/frida.map&mode=browse&template=op
 Replace the frida.map with the name of your own mapserver
 [mapfile](http://www.mapserver.org/mapfile/).
 
+This works:
+
+http://localhost/cgi-bin/mapserv?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=quebec&map=%2Fmap%2Fgeneric.map&CRS=EPSG%3A4326&STYLES=&WIDTH=1435&HEIGHT=918&BBOX=45.470575,-73.618441,45.498887,-73.536730
+
+http://localhost/cgi-bin/mapserv?map=/map/generic.map&layer=quebec&mode=map
+
+
+http://localhost/cgi-bin/mapserv?map=/map/generic.map&mode=browse&template=openlayers&layers=all
+
 ## Debugging
 
 You can use the following environment variables (when starting the container)
